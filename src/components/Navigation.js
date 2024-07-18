@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Navigation.sass';
 
 function Navigation() {
@@ -27,14 +27,14 @@ function Navigation() {
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg" className={showNav ? "navigation" : "navigation--hidden"}>
-            {/* <Container>
+            <Container>
                 <Navbar.Brand as={Link} to="/">
                     <img
-                        src="https://template-riptide.s3.us-west-1.amazonaws.com/riptide-logo-OLD-white.png"
+                        src="https://ericcallari.s3.us-west-1.amazonaws.com/logo.png"
                         width="125"
                         height="auto"
                         className="d-inline-block align-top"
-                        alt="Riptide Logo"
+                        alt="Eric Callari Logo"
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -46,7 +46,7 @@ function Navigation() {
                         <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
-            </Container> */}
+            </Container>
         </Navbar>
     );
 }
