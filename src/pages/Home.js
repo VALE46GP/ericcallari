@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import './Home.sass';
 import HeroParallax from '../components/HeroParallax';
 
@@ -7,9 +7,9 @@ function Home() {
     return (
         <div className='home'>
             <HeroParallax />
-            <Container className='home__content' style={{ marginTop: '20px' }}>
-                <Row className='home__section'>
-                    <Col lg={12}>
+            <Container>
+                <Row className='home__row'>
+                    <Col lg={10} className='home__col'>
                         <p> This site is all about my photography and videography.
                             I’m also a musician and often score my videos.
                             I went to school for mechanical engineering and work as full-time software engineer.

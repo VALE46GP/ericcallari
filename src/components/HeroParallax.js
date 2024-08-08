@@ -1,5 +1,6 @@
 import './HeroParallax.sass';
 import React, { useState, useEffect } from 'react';
+import HeroNav from './HeroNav';
 
 function HeroParallax() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -34,17 +35,14 @@ function HeroParallax() {
                 <img src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-front-2-compressed.png' alt='Front Layer' />
             </div>
             <div className='hero-parallax__content'>
-                <img className='hero-parallax__logo' src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png' alt='Eric Callari Logo' />
+                <div className='hero-parallax__nav-container'>
+                    <HeroNav />
+                </div>
                 <div className={`hero-parallax__scroll-arrow ${isScrolled ? 'hero-parallax__scroll-arrow--hide' : ''}`}>
                     <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
                         <path d='M6 9l6 6 6-6' />
                     </svg>
                 </div>
-                {/*<div className={`hero-parallax__scroll-arrow hero-parallax__scroll-arrow--right ${isScrolled ? 'hero-parallax__scroll-arrow--hide' : ''}`}>*/}
-                {/*    <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>*/}
-                {/*        <path d='M6 9l6 6 6-6' />*/}
-                {/*    </svg>*/}
-                {/*</div>*/}
             </div>
         </div>
     );
