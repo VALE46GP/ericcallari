@@ -1,26 +1,51 @@
-.hero
+.hero-parallax
     position: relative
     background-color: black
     width: 100vw
-    //height: calc(100vh - var(--nav-height))
     height: 100vh
     overflow: hidden
+
+    &__layer
+        position: absolute
+        width: 100%
+        height: 100%
+        overflow: hidden
+
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            object-position: center bottom
+            transform-origin: bottom center
+            transition: transform 5s ease-out
+
+            //&.zoom
+            //    transform: scale(1.05)
+
+            &.zoom-middle
+                transform: scale(1.02)
+
+            &.zoom-front
+                transform: scale(1.08)
+
+    &__layer--back
+        z-index: 1
+
+    &__layer--middle
+        z-index: 2
+
+    &__layer--front
+        z-index: 3
 
     &__content
         position: absolute
         width: 100%
         height: 100%
-        z-index: 2
-
-    &__image
-        width: 100%
-        height: 100%
-        object-fit: cover
-        object-position: center center
+        z-index: 4
 
     &__logo
         position: absolute
-        top: 50%
+        top: 15%
         left: 50%
         transform: translate(-50%, -50%)
         max-width: 200px

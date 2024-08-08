@@ -26,24 +26,24 @@ function Navigation() {
     }, []);
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" className={showNav ? "navigation" : "navigation--hidden"}>
+        <Navbar bg='dark' variant='dark' expand='lg' className={showNav ? 'navigation' : 'navigation--hidden'}>
             <Container>
-                <Navbar.Brand as={Link} to="/">
+                <Navbar.Brand as={Link} to='/'>
                     <img
-                        src="https://ericcallari.s3.us-west-1.amazonaws.com/logo.png"
-                        width="125"
-                        height="auto"
-                        className="d-inline-block align-top"
-                        alt="Eric Callari Logo"
+                        src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png'
+                        width='125'
+                        height='auto'
+                        className='navigation__logo d-inline-block align-top'
+                        alt='Eric Callari Logo'
                     />
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/about">About</Nav.Link>
-                        <Nav.Link as={Link} to="/events">Events</Nav.Link>
-                        <Nav.Link as={Link} to="/gallery">Gallery</Nav.Link>
-                        <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='me-auto'>
+                        <Nav.Link as={Link} to='/about'>About</Nav.Link>
+                        <Nav.Link as={Link} to='/events'>Events</Nav.Link>
+                        <Nav.Link as={Link} to='/gallery'>Gallery</Nav.Link>
+                        <Nav.Link as={Link} to='/contact'>Contact</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

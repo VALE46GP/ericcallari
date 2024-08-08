@@ -9,13 +9,13 @@ import './App.sass';
 function App() {
     return (
         <Router>
-            <div className="app">
-                <div className="nav-container" >
-                    <Navigation />
-                </div>
+            <div className='app'>
+                {/*<div className='nav-container' >*/}
+                {/*    <Navigation />*/}
+                {/*</div>*/}
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path='/' element={<Home />} />
+                    <Route path='/gallery' element={<Gallery />} />
                 </Routes>
                 <Footer />
             </div>
