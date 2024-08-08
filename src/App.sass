@@ -1,9 +1,15 @@
 .app
-    position: relative
-    padding-top: var(--nav-height)
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+
+    &.home-page
+        .nav-container
+            display: none
 
 .nav-container
     position: fixed
+    flex-shrink: 0
     width: 100%
     z-index: 99
     top: 0

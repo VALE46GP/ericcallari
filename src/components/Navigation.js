@@ -41,8 +41,8 @@ function Navigation() {
                 <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='me-auto'>
                         <Nav.Link as={Link} to='/about'>About</Nav.Link>
-                        <Nav.Link as={Link} to='/events'>Events</Nav.Link>
-                        <Nav.Link as={Link} to='/gallery'>Gallery</Nav.Link>
+                        <Nav.Link as={Link} to='/photo'>Photo</Nav.Link>
+                        <Nav.Link as={Link} to='/video'>Video</Nav.Link>
                         <Nav.Link as={Link} to='/contact'>Contact</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

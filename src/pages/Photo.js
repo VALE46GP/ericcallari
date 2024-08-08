@@ -1,8 +1,8 @@
 import React from 'react';
 import ImageGrid from '../components/ImageGrid';
-import './Gallery.sass';
+import './Photo.sass';
 
-function Gallery() {
+function Photo() {
     const imageURLs = [
         'https://template-riptide.s3.us-west-1.amazonaws.com/placeholder-whale.jpg',
         'https://template-riptide.s3.us-west-1.amazonaws.com/placeholder-whale.jpg',
@@ -41,10 +41,10 @@ function Gallery() {
     ];
 
     return (
-        <div className="gallery">
+        <div className="photo">
             <ImageGrid imageURLs={imageURLs} />
         </div>
     );
 }
 
-export default Gallery;
+export default Photo;

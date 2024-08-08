@@ -11,8 +11,8 @@ function HeroNav() {
                     <div className='hero-nav__col'>
                         <img className='hero-nav__logo' src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png' alt='Eric Callari Logo' />
                         <div className='hero-nav__buttons'>
-                            <Link to='/video' className='hero-nav__button'>Video</Link>
-                            <Link to='/photo' className='hero-nav__button hero-nav__button--2'>Photo</Link>
+                            <Link to='/photo' className='hero-nav__button'>Photo</Link>
+                            <Link to='/video' className='hero-nav__button hero-nav__button--2'>Video</Link>
                         </div>
                     </div>
                 </Row>
