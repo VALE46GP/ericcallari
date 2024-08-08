@@ -15,18 +15,19 @@
             width: 100%
             height: 100%
             object-fit: cover
-            object-position: center bottom
+            object-position: center center
             transform-origin: bottom center
-            transition: transform 5s ease-out
-
-            //&.zoom
-            //    transform: scale(1.05)
+            transition: transform 10s ease-out, object-position 15s ease-out
+            animation: moveDown 15s forwards
 
             &.zoom-middle
-                transform: scale(1.02)
+                transform: scale(1.025)
 
             &.zoom-front
                 transform: scale(1.08)
+
+            &.move-down
+                animation: moveDown 15s forwards
 
     &__layer--back
         z-index: 1
@@ -45,8 +46,8 @@
 
     &__logo
         position: absolute
-        top: 15%
-        left: 50%
+        top: 20%
+        right: 0%
         transform: translate(-50%, -50%)
         max-width: 200px
         max-height: 200px
@@ -62,17 +63,16 @@
         transform: translateX(-50%)
         color: gold
         animation: HeroBounce 2s infinite
+        transition: opacity 2s ease
+        opacity: 1
 
         &--right
             animation-delay: .1s
             left: unset
             right: 33%
 
-        &--stop-bounce
-            animation: none
-            transform: translateY(0)
+        &--hide
             opacity: 0
-            transition: opacity 2s ease
 
     svg
         animation: heroFadeIn 4s forwards
@@ -98,3 +98,9 @@
         transform: translateY(-30px)
     60%
         transform: translateY(-15px)
+
+@keyframes moveDown
+    0%
+        object-position: 50% 30%
+    100%
+        object-position: 50% 70%
