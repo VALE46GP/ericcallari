@@ -13,7 +13,7 @@ function Home() {
                         <p> This site is all about my photography and videography.
                             I’m also a musician and often score my videos.
                             I went to school for mechanical engineering and work as full-time software engineer.
-                            I built this custom website using javascript and React.
+                            <strong> I built this website you're viewing from scratch using javascript and React. </strong>
                             I have a lot of different passions and have worked tirelessly my whole life to develop a wiiiiiide array of skills across many disciplines.
                             I find that with photography and videography, these skills complement each other very well.</p>
                         <p> I’m based in San Francisco, California.
@@ -25,6 +25,16 @@ function Home() {
                             This led me into wildlife photography and portraiture.
                             Most of the videography I do these days is centered around musicians.
                             I’m fully hooked now and will continue to shoot regardless of where life takes me!</p>
+                        <div className='home__button-container'>
+                            <a
+                                className='home__button'
+                                href='https://ericcallari.s3.us-west-1.amazonaws.com/Eric+Callari+Resume.pdf'
+                                rel='noopener noreferrer'
+                                target='_blank'
+                            >
+                                View My Resume
+                            </a>
+                        </div>
                     </Col>
                 </Row>
             </Container>

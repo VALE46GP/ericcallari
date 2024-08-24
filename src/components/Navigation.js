@@ -30,20 +30,22 @@ function Navigation() {
             <Container>
                 <Navbar.Brand as={Link} to='/'>
                     <img
+                        alt='Eric Callari Logo'
+                        className='navigation__logo d-inline-block align-top'
+                        height='auto'
                         src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png'
                         width='125'
-                        height='auto'
-                        className='navigation__logo d-inline-block align-top'
-                        alt='Eric Callari Logo'
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
                 <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='me-auto'>
-                        <Nav.Link as={Link} to='/about'>About</Nav.Link>
                         <Nav.Link as={Link} to='/photo'>Photo</Nav.Link>
-                        <Nav.Link as={Link} to='/video'>Video</Nav.Link>
-                        <Nav.Link as={Link} to='/contact'>Contact</Nav.Link>
+                        <Nav.Link
+                            as={Link}
+                            target='_blank'
+                            to='https://www.youtube.com/@ericcallari6704/featured'
+                        >Video</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

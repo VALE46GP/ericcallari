@@ -1,0 +1,41 @@
+@import '../index.sass'
+
+.hero-filter
+    position: relative
+
+    &__button
+        @extend %button-style
+        text-transform: capitalize
+
+        &--active
+            background-color: rgba(255, 255, 255, 0.7)
+            color: black
+
+    &__filter-wrapper
+        position: absolute
+        bottom: 0
+        left: 50%
+        transform: translateX(-50%)
+        width: 100%
+        overflow-x: auto
+        white-space: nowrap
+        -ms-overflow-style: none  /* IE and Edge */
+        scrollbar-width: none  /* Firefox */
+
+        &::-webkit-scrollbar
+            display: none
+
+    &__filter
+        display: inline-flex
+        gap: .5rem
+        padding: 1rem .5rem
+        white-space: nowrap
+        justify-content: center
+        min-width: 100%
+
+    &__image
+        width: 100%
+        height: 20vw
+        min-height: 300px
+        object-fit: cover
+        object-position: center center

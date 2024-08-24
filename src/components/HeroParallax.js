@@ -27,13 +27,13 @@ function HeroParallax() {
     return (
         <div className='hero-parallax'>
             <div className='hero-parallax__layer hero-parallax__layer--back'>
-                <img src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-back-compressed.jpg' alt='Background Layer' />
+                <img alt='Background Layer' src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-back-compressed.jpg' />
             </div>
             <div className='hero-parallax__layer hero-parallax__layer--middle'>
-                <img src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-middle-2-compressed.png' alt='Middle Layer' />
+                <img alt='Middle Layer' src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-middle-2-compressed.png' />
             </div>
             <div className='hero-parallax__layer hero-parallax__layer--front'>
-                <img src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-front-2-compressed.png' alt='Front Layer' />
+                <img alt='Front Layer' src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-front-2-compressed.png' />
             </div>
             <div className='hero-parallax__content'>
                 <Container>

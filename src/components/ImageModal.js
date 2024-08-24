@@ -5,14 +5,18 @@ function ImageModal({ url, onClose }) {
     const [opacity, setOpacity] = useState(0);
 
     useEffect(() => {
-        setOpacity(1); // Set opacity to 1 when the component mounts
-        return () => setOpacity(0); // Reset opacity when the component unmounts
+        setOpacity(1);
+        return () => setOpacity(0);
     }, []);
 
     return (
-        <div className="image-modal" style={{ opacity: opacity }}>
-            <img src={url} alt="Full Screen" />
-            <button className="image-modal__close" onClick={onClose}>X</button>
+        <div
+            className='image-modal'
+            onClick={onClose}
+            style={{ opacity: opacity }}
+        >
+            <img src={url} alt='Full Screen' />
+            <button className='image-modal__close' onClick={onClose}>X</button>
         </div>
     );
 }

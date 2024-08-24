@@ -1,3 +1,5 @@
+@import '../index.sass'
+
 .hero-nav
     display: flex
     flex-direction: column
@@ -9,35 +11,21 @@
         gap: 2rem
 
     &__button
-        animation: heroNavFadeIn 2s forwards
-        animation-delay: 2.3s
+        @extend %button-style
+        animation: heroNavFadeIn 1s forwards
+        animation-delay: 1.3s
         opacity: 0
-        padding: 10px 20px
-        border: 1px solid white
-        border-radius: 5px
-        background-color: rgba(255, 255, 255, 0.2)
-        transition: background-color 0.3s, color 0.3s
         width: 100%
-        color: white
-        text-align: center
-        text-decoration: none
-        font-size: 20px
-
-        &:focus-visible,
-        &:hover
-            cursor: pointer
-            background-color: rgba(255, 255, 255, 0.7)
-            color: black
 
         &--2
-            animation-delay: 2.6s
+            animation-delay: 1.6s
 
     &__col
         width: 250px
 
     &__logo
         animation: heroNavFadeIn 2s forwards
-        animation-delay: 2s
+        animation-delay: 1s
         opacity: 0
         width: 100%
 
