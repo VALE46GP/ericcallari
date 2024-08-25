@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Photo from './pages/Photo';
@@ -10,7 +10,8 @@ function App() {
     return (
         <Router>
             <AppContent />
-        </Router>
+        </Router>,
+        document.getElementById('root')
     );
 }
 
