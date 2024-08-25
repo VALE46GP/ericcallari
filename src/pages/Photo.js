@@ -65,7 +65,7 @@ function Photo() {
         fetchPhotos();
     }, [activeFilter, filters]);
 
-    // Memoize the shuffled images so they only change when imageURLs changes
+    // Memoize the shuffled images, so they only change when imageURLs changes
     const shuffledImageURLs = useMemo(() => shuffleArray([...imageURLs]), [imageURLs]);
 
     return (
