@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Navigation.sass';
 
 function Navigation() {
     const [showNav, setShowNav] = useState(true);
-    let lastScrollY = window.pageYOffset;
-    let isScrollingUp = false;
+    const lastScrollY = useRef(window.pageYOffset);
+    const isScrollingUp = useRef(false);
 
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.pageYOffset;
-            isScrollingUp = currentScrollY < lastScrollY;
-            setShowNav(isScrollingUp || currentScrollY < 50);
-            lastScrollY = currentScrollY;
+            isScrollingUp.current = currentScrollY < lastScrollY.current;
+            setShowNav(isScrollingUp.current || currentScrollY < 50);
+            lastScrollY.current = currentScrollY;
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -21,8 +21,15 @@ function Navigation() {
     }, []);
 
     useEffect(() => {
-        const navbarHeight = document.querySelector('.navbar').offsetHeight;
-        document.documentElement.style.setProperty('--nav-height', `${navbarHeight}px`);
+        const updateNavbarHeight = () => {
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            document.documentElement.style.setProperty('--nav-height', `${navbarHeight}px`);
+        };
+
+        updateNavbarHeight();
+        window.addEventListener('resize', updateNavbarHeight);
+
+        return () => window.removeEventListener('resize', updateNavbarHeight);
     }, []);
 
     return (
@@ -45,7 +52,9 @@ function Navigation() {
                             as={Link}
                             target='_blank'
                             to='https://www.youtube.com/@ericcallari6704/featured'
-                        >Video</Nav.Link>
+                        >
+                            Video
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

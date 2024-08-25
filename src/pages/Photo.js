@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import HeroFilter from '../components/HeroFilter';
 import ImageGrid from '../components/ImageGrid';
 import './Photo.sass';
@@ -23,7 +23,6 @@ const listPhotos = async (prefixes) => {
 
             const data = await s3.listObjectsV2(params).promise();
             data.Contents.forEach((item) => {
-                // Check if the file is an image
                 if (imageExtensions.some(ext => item.Key.toLowerCase().endsWith(ext))) {
                     const encodedKey = encodeURIComponent(item.Key);
                     photos.push({
@@ -51,7 +50,7 @@ const shuffleArray = (array) => {
 function Photo() {
     const [imageURLs, setImageURLs] = useState([]);
     const [activeFilter, setActiveFilter] = useState('all');
-    const filters = ['all', 'abstract', 'animals', 'automotive', 'landscape', 'music', 'other', 'portrait'];
+    const filters = useMemo(() => ['all', 'abstract', 'animals', 'automotive', 'landscape', 'music', 'other', 'portrait'], []);
 
     useEffect(() => {
         const fetchPhotos = async () => {
@@ -60,12 +59,14 @@ function Photo() {
                 folders = [activeFilter];
             }
             const photos = await listPhotos(folders.map(folder => `gallery/${folder}`));
-            const shuffledPhotos = shuffleArray(photos);
-            setImageURLs(shuffledPhotos);
+            setImageURLs(photos); // Set photos directly without shuffling initially
         };
 
         fetchPhotos();
-    }, [activeFilter]); // Re-run effect when activeFilter changes
+    }, [activeFilter, filters]);
+
+    // Memoize the shuffled images so they only change when imageURLs changes
+    const shuffledImageURLs = useMemo(() => shuffleArray([...imageURLs]), [imageURLs]);
 
     return (
         <div className="photo">
@@ -74,7 +75,7 @@ function Photo() {
                 filters={filters}
                 onFilterSelect={setActiveFilter}
             />
-            <ImageGrid imageURLs={imageURLs} />
+            <ImageGrid imageURLs={shuffledImageURLs} />
         </div>
     );
 }
