@@ -20,11 +20,14 @@ function Home() {
                             My journey into photography started in high school in upstate New York.
                             I continued shooting through college and later began work operating video cameras and working as a grip in New York City, working for NYU, Coach Company, independent film makers, and others.
                             I was mainly shooting interviews and working on short films at that time.
-                            When I moved to California about ten years ago, I became obsessed with landscapes.
+                            Since then, I have been a camera for hire at events, weddings, concerts, and portraits in nature.
+                            I'm skilled in editing, both video and photos.</p>
+                        <p> When I moved to California about ten years ago, I became obsessed with landscapes.
                             I shoot stills and timelapses to capture the forces of nature.
                             This led me into wildlife photography and portraiture.
                             Most of the videography I do these days is centered around musicians.
                             I’m fully hooked now and will continue to shoot regardless of where life takes me!</p>
+                        <p> Please send me an email if you're interested in a shoot or in prints!</p>
                         <div className='home__button-container'>
                             <a
                                 className='home__button'
