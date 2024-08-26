@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import HeroFilter from '../components/HeroFilter';
 import ImageGrid from '../components/ImageGrid';
 import './Photo.sass';
 import AWS from 'aws-sdk';
+import loadingIcon from '../assets/icons/loading.svg';
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
@@ -49,7 +50,9 @@ const shuffleArray = (array) => {
 
 function Photo() {
     const [imageURLs, setImageURLs] = useState([]);
+    const [displayedImages, setDisplayedImages] = useState([]);
     const [activeFilter, setActiveFilter] = useState('all');
+    const [loading, setLoading] = useState(false);
     const filters = useMemo(() => ['all', 'abstract', 'animals', 'automotive', 'landscape', 'music', 'other', 'portrait'], []);
 
     useEffect(() => {
@@ -59,14 +62,35 @@ function Photo() {
                 folders = [activeFilter];
             }
             const photos = await listPhotos(folders.map(folder => `gallery/${folder}`));
-            setImageURLs(photos); // Set photos directly without shuffling initially
+            const shuffledPhotos = shuffleArray(photos); // Shuffle photos here
+            setImageURLs(shuffledPhotos);
+            setDisplayedImages(shuffledPhotos.slice(0, 20)); // Display only the first 20 images initially
         };
 
         fetchPhotos();
     }, [activeFilter, filters]);
 
-    // Memoize the shuffled images, so they only change when imageURLs changes.
-    const shuffledImageURLs = useMemo(() => shuffleArray([...imageURLs]), [imageURLs]);
+    const loadMoreImages = useCallback(() => {
+        if (loading) return;
+        setLoading(true);
+        setTimeout(() => {
+            setDisplayedImages(prev => [
+                ...prev,
+                ...imageURLs.slice(prev.length, prev.length + 20)
+            ]);
+            setLoading(false);
+        }, 1000); // Simulate network delay
+    }, [imageURLs, loading]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
+            loadMoreImages();
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [loadMoreImages, loading]);
 
     return (
         <div className="photo">
@@ -75,7 +99,12 @@ function Photo() {
                 filters={filters}
                 onFilterSelect={setActiveFilter}
             />
-            <ImageGrid imageURLs={shuffledImageURLs} />
+            <ImageGrid imageURLs={displayedImages} />
+            {loading && (
+                <div className="photo__loading-spinner">
+                    <img src={loadingIcon} alt="Loading..." />
+                </div>
+            )}
         </div>
     );
 }
