@@ -10,8 +10,7 @@ function App() {
     return (
         <Router>
             <AppContent />
-        </Router>,
-        document.getElementById('root')
+        </Router>
     );
 }
 
