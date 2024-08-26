@@ -14,7 +14,7 @@ function Home() {
                             I’m also a musician and often score my videos.
                             I went to school for mechanical engineering and work as full-time software engineer.
                             <strong> I built this website you're viewing from scratch using javascript and React. </strong>
-                            I have a lot of different passions and have worked tirelessly my whole life to develop a wiiiiiide array of skills across many disciplines.
+                            I have a lot of different passions and have worked tirelessly my whole life to develop a wide array of skills across many disciplines.
                             I find that with photography and videography, these skills complement each other very well.</p>
                         <p> I’m based in San Francisco, California.
                             My journey into photography started in high school in upstate New York.
