@@ -55,6 +55,8 @@ function Photo() {
     const [loading, setLoading] = useState(false);
     const filters = useMemo(() => ['all', 'abstract', 'animals', 'automotive', 'landscape', 'music', 'other', 'portrait'], []);
 
+    const imagesPerLoad = window.innerWidth <= 768 ? 10 : 20;
+
     useEffect(() => {
         const fetchPhotos = async () => {
             let folders = filters.slice(1); // Exclude 'all'
@@ -64,11 +66,11 @@ function Photo() {
             const photos = await listPhotos(folders.map(folder => `gallery/${folder}`));
             const shuffledPhotos = shuffleArray(photos); // Shuffle photos here
             setImageURLs(shuffledPhotos);
-            setDisplayedImages(shuffledPhotos.slice(0, 20)); // Display only the first 20 images initially
+            setDisplayedImages(shuffledPhotos.slice(0, imagesPerLoad)); // Display only the first set of images initially
         };
 
         fetchPhotos();
-    }, [activeFilter, filters]);
+    }, [activeFilter, filters, imagesPerLoad]);
 
     const loadMoreImages = useCallback(() => {
         if (loading) return;
@@ -76,11 +78,11 @@ function Photo() {
         setTimeout(() => {
             setDisplayedImages(prev => [
                 ...prev,
-                ...imageURLs.slice(prev.length, prev.length + 20)
+                ...imageURLs.slice(prev.length, prev.length + imagesPerLoad)
             ]);
             setLoading(false);
-        }, 1000); // Simulate network delay
-    }, [imageURLs, loading]);
+        }, 1000);
+    }, [imageURLs, loading, imagesPerLoad]);
 
     useEffect(() => {
         const handleScroll = () => {
