@@ -2,32 +2,24 @@
 
 .hero-nav
     display: flex
-    justify-content: flex-end
-
-    @media only screen and (max-width: 940px)
-        justify-content: center
+    justify-content: center
 
     &__buttons
         margin-top: 2rem
         display: flex
-        flex-direction: column
-        gap: 2rem
+        justify-content: space-around
+        gap: 20rem
+        width: 100%
 
         @media only screen and (max-width: 940px)
-            flex-direction: row
-            justify-content: space-around
-            width: 100%
+            gap: 2rem
 
     &__button
         @extend %button-style
         animation: heroNavFadeIn 1s forwards
         animation-delay: 1.3s
         opacity: 0
-        width: 100%
         min-width: 200px
-
-        @media only screen and (max-width: 940px)
-            width: unset
 
         @media only screen and (max-width: 750px)
             min-width: 150px
@@ -38,12 +30,6 @@
         &--2
             animation-delay: 1.6s
 
-    &__col
-        width: 250px
-
-        @media only screen and (max-width: 940px)
-            width: 100%
-
     &__logo
         animation: heroNavFadeIn 2s forwards
         animation-delay: 1s
@@ -51,17 +37,13 @@
         width: 250px
 
         &-container
-            @media only screen and (max-width: 940px)
-                display: flex
-                justify-content: center
-                width: 100%
+            display: flex
+            justify-content: center
+            width: 100%
 
     &__row
         display: flex
-        justify-content: flex-end
-
-        @media only screen and (max-width: 940px)
-            justify-content: center
+        justify-content: center
 
 @keyframes heroNavFadeIn
     from
