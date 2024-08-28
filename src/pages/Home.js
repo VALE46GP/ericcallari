@@ -13,7 +13,7 @@ function Home() {
                         <p> This site is all about my photography and videography.
                             I’m also a musician and often score my videos.
                             I went to school for mechanical engineering and work as full-time software engineer.
-                            <strong> I built this website you're viewing from scratch using javascript and React. </strong>
+                            <strong> I built this website you're viewing using React.js. </strong>
                             I have a lot of different passions and have worked tirelessly my whole life to develop a wide array of skills across many disciplines.
                             I find that with photography and videography, these skills complement each other very well.</p>
                         <p> I’m based in San Francisco, California.
