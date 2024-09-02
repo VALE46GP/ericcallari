@@ -86,8 +86,13 @@ function Photo() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
-            loadMoreImages();
+            const scrollableHeight = document.documentElement.scrollHeight;
+            const currentScroll = window.innerHeight + window.scrollY;
+
+            // Trigger load more images if the user is at the bottom or if the content height is less than the window height
+            if (currentScroll >= scrollableHeight - 1 || scrollableHeight <= window.innerHeight) {
+                loadMoreImages();
+            }
         };
 
         window.addEventListener('scroll', handleScroll);
