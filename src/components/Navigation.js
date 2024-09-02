@@ -51,7 +51,7 @@ function Navigation() {
                         <Nav.Link
                             as={Link}
                             target='_blank'
-                            to='https://www.youtube.com/@ericcallari6704/featured'
+                            to='https://www.youtube.com/@ericcallari'
                         >
                             Video
                         </Nav.Link>

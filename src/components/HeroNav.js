@@ -19,7 +19,7 @@ function HeroNav() {
                     <Link
                         className='hero-nav__button hero-nav__button--2'
                         target='_blank'
-                        to='https://www.youtube.com/@ericcallari6704/featured'
+                        to='https://www.youtube.com/@ericcallari'
                     >Video</Link>
                 </div>
             </div>
