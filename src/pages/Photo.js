@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import HeroFilter from '../components/HeroFilter';
 import ImageGrid from '../components/ImageGrid';
 import './Photo.sass';
@@ -53,18 +53,21 @@ function Photo() {
     const [displayedImages, setDisplayedImages] = useState([]);
     const [activeFilter, setActiveFilter] = useState('all');
     const [loading, setLoading] = useState(false);
+    const [allImagesLoaded, setAllImagesLoaded] = useState(false);
     const filters = useMemo(() => ['all', 'abstract', 'animals', 'automotive', 'landscape', 'music', 'other', 'portrait'], []);
+    const sentinelRef = useRef(null);
 
     const imagesPerLoad = window.innerWidth <= 768 ? 10 : 20;
 
     useEffect(() => {
         const fetchPhotos = async () => {
+            setAllImagesLoaded(false);
             let folders = filters.slice(1); // Exclude 'all'
             if (activeFilter !== 'all') {
                 folders = [activeFilter];
             }
             const photos = await listPhotos(folders.map(folder => `gallery/${folder}`));
-            const shuffledPhotos = shuffleArray(photos); // Shuffle photos here
+            const shuffledPhotos = shuffleArray(photos);
             setImageURLs(shuffledPhotos);
             setDisplayedImages(shuffledPhotos.slice(0, imagesPerLoad)); // Display only the first set of images initially
         };
@@ -72,32 +75,46 @@ function Photo() {
         fetchPhotos();
     }, [activeFilter, filters, imagesPerLoad]);
 
+    useEffect(() => {
+        // Determine if all images are loaded
+        if (displayedImages.length >= imageURLs.length) {
+            setAllImagesLoaded(true);
+        } else {
+            setAllImagesLoaded(false);
+        }
+    }, [displayedImages.length, imageURLs.length]);
+
     const loadMoreImages = useCallback(() => {
-        if (loading) return;
+        if (loading || allImagesLoaded) return;
+
         setLoading(true);
         setTimeout(() => {
+            const newDisplayedImages = imageURLs.slice(displayedImages.length, displayedImages.length + imagesPerLoad);
+
             setDisplayedImages(prev => [
                 ...prev,
-                ...imageURLs.slice(prev.length, prev.length + imagesPerLoad)
+                ...newDisplayedImages
             ]);
+
             setLoading(false);
         }, 1000);
-    }, [imageURLs, loading, imagesPerLoad]);
+    }, [imageURLs, displayedImages.length, loading, imagesPerLoad, allImagesLoaded]);
 
     useEffect(() => {
         const handleScroll = () => {
-            const scrollableHeight = document.documentElement.scrollHeight;
-            const currentScroll = window.innerHeight + window.scrollY;
+            if (!sentinelRef.current || allImagesLoaded) return;
 
-            // Trigger load more images if the user is at the bottom or if the content height is less than the window height
-            if (currentScroll >= scrollableHeight - 1 || scrollableHeight <= window.innerHeight) {
+            const rect = sentinelRef.current.getBoundingClientRect();
+            if (rect.top <= window.innerHeight) {
                 loadMoreImages();
             }
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [loadMoreImages, loading]);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [loadMoreImages, allImagesLoaded]);
 
     return (
         <div className="photo">
@@ -111,6 +128,9 @@ function Photo() {
                 <div className="photo__loading-spinner">
                     <img src={loadingIcon} alt="Loading..." />
                 </div>
+            )}
+            {!allImagesLoaded && (
+                <div ref={sentinelRef} style={{ height: '1px' }}></div>
             )}
         </div>
     );
