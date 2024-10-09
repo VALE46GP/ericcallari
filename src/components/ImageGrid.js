@@ -11,7 +11,7 @@ function ImageGrid({ imageURLs }) {
                 <div
                     key={obj.key}
                     className='image-grid__item'
-                    style={{ backgroundImage: `url(${obj.url})` }}
+                    style={{ backgroundImage: `url("https://${obj.url.split('/')[2]}/${encodeURIComponent(obj.key)}")` }}
                     onClick={() => setModalUrl(obj.url)}
                 >
                 </div>
