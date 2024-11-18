@@ -67,10 +67,6 @@ The site is configured for deployment to various platforms. For production build
 npm run build
 ```
 
-## 📄 License
-
-MIT License - feel free to use this code for your own portfolio!
-
 ## 🤝 Contact
 
 For any inquiries about the site or photography services:
