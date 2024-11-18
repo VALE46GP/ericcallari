@@ -11,7 +11,6 @@ A modern, responsive photography and videography portfolio website built with Re
 - Smooth animations and transitions
 - Mobile-responsive design
 - Integration with AWS S3 for image storage
-- YouTube integration for video content
 
 ## 🛠 Tech Stack
 
@@ -39,25 +38,6 @@ Create a `.env` file in the root directory with the following variables:
 - `/src/pages` - Main page components
 - `/src/assets` - Static assets
 - `/src/styles` - SASS stylesheets
-
-## 🎨 Key Components
-
-### HeroParallax
-A multi-layer parallax scrolling hero section with dynamic scaling and movement effects.
-
-Reference:
-
-### Photo Gallery
-Dynamic photo gallery with category filtering and infinite scroll functionality.
-
-Reference:
-
-## 📱 Responsive Design
-
-The site is fully responsive and optimized for:
-- Desktop (1200px+)
-- Tablet (768px - 1199px)
-- Mobile (< 768px)
 
 ## 🚀 Deployment
 
