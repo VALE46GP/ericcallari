@@ -2,6 +2,8 @@
 
 A modern, responsive photography and videography portfolio website built with React. Features a parallax hero section, dynamic image gallery with filtering capabilities, and smooth animations throughout.
 
+🌐 **[View Live Site](https://ericcallari.com/)**
+
 ## 🌟 Features
 
 - Parallax scrolling hero section with multi-layer depth effect
