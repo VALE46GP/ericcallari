@@ -209,7 +209,11 @@ function Photo() {
                 </div>
             ) : (
                 <>
-                    <ImageGrid imageURLs={displayedImages} />
+                    <ImageGrid
+                        imageURLs={displayedImages}
+                        onLoadMore={loadMoreImages}
+                        allImagesLoaded={allImagesLoaded}
+                    />
 
                     {loading && (
                         <div className="photo__loading-spinner">

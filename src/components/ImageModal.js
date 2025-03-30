@@ -99,10 +99,6 @@ function ImageModal({ url, onClose, allImages, currentIndex, onPrevious, onNext 
         >
             <div className="image-modal__content" onClick={(e) => e.stopPropagation()}>
                 <img src={url} alt="Full Screen" />
-
-                <div className="image-modal__counter">
-                    {currentIndex + 1} / {allImages.length}
-                </div>
             </div>
 
             <button className="image-modal__close" onClick={onClose}>X</button>

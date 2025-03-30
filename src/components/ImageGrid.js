@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ImageModal from './ImageModal';
 import './ImageGrid.sass';
 
-function ImageGrid({ imageURLs }) {
+function ImageGrid({ imageURLs, onLoadMore, allImagesLoaded }) {
     const [modalIndex, setModalIndex] = useState(null);
 
+    // Navigate modal and trigger lazy loading when needed
+    const navigateAndLoadIfNeeded = useCallback((newIndex) => {
+        setModalIndex(newIndex);
+
+        // If we're near the end of loaded images, try to load more
+        const loadThreshold = 3; // Load more when within 3 images of the end
+        if (!allImagesLoaded && newIndex >= imageURLs.length - loadThreshold) {
+            onLoadMore && onLoadMore();
+        }
+    }, [imageURLs.length, allImagesLoaded, onLoadMore]);
+
     const openModal = (index) => {
-        setModalIndex(index);
+        navigateAndLoadIfNeeded(index);
     };
 
     const closeModal = () => {
@@ -15,21 +26,39 @@ function ImageGrid({ imageURLs }) {
 
     const goToPrevious = () => {
         setModalIndex((prevIndex) => {
-            if (prevIndex <= 0) {
-                return imageURLs.length - 1; // Loop to the end
-            }
-            return prevIndex - 1;
+            const newIndex = prevIndex <= 0 ? imageURLs.length - 1 : prevIndex - 1;
+            return newIndex;
         });
     };
 
     const goToNext = () => {
         setModalIndex((prevIndex) => {
-            if (prevIndex >= imageURLs.length - 1) {
-                return 0; // Loop to the beginning
+            const newIndex = prevIndex >= imageURLs.length - 1 ? 0 : prevIndex + 1;
+
+            // If we're about to wrap around to the beginning, check if we need to load more
+            if (!allImagesLoaded && newIndex === 0) {
+                onLoadMore && onLoadMore();
             }
-            return prevIndex + 1;
+
+            // If we're near the end of loaded images, try to load more
+            if (!allImagesLoaded && prevIndex >= imageURLs.length - 3) {
+                onLoadMore && onLoadMore();
+            }
+
+            return newIndex;
         });
     };
+
+    // Use effect to update the modal index if needed when new images are loaded
+    useEffect(() => {
+        // If modal is open and the current index is valid
+        if (modalIndex !== null && modalIndex >= 0 && modalIndex < imageURLs.length) {
+            // No need to do anything, the index is still valid
+        } else if (modalIndex !== null && modalIndex >= imageURLs.length) {
+            // This could happen if images were removed - adjust the index
+            setModalIndex(imageURLs.length - 1);
+        }
+    }, [imageURLs.length, modalIndex]);
 
     return (
         <div className="image-grid">
@@ -43,7 +72,7 @@ function ImageGrid({ imageURLs }) {
                 </div>
             ))}
 
-            {modalIndex !== null && (
+            {modalIndex !== null && modalIndex < imageURLs.length && (
                 <ImageModal
                     url={imageURLs[modalIndex].url}
                     onClose={closeModal}
