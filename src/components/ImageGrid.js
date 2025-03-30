@@ -3,7 +3,33 @@ import ImageModal from './ImageModal';
 import './ImageGrid.sass';
 
 function ImageGrid({ imageURLs }) {
-    const [modalUrl, setModalUrl] = useState(null);
+    const [modalIndex, setModalIndex] = useState(null);
+
+    const openModal = (index) => {
+        setModalIndex(index);
+    };
+
+    const closeModal = () => {
+        setModalIndex(null);
+    };
+
+    const goToPrevious = () => {
+        setModalIndex((prevIndex) => {
+            if (prevIndex <= 0) {
+                return imageURLs.length - 1; // Loop to the end
+            }
+            return prevIndex - 1;
+        });
+    };
+
+    const goToNext = () => {
+        setModalIndex((prevIndex) => {
+            if (prevIndex >= imageURLs.length - 1) {
+                return 0; // Loop to the beginning
+            }
+            return prevIndex + 1;
+        });
+    };
 
     return (
         <div className="image-grid">
@@ -12,11 +38,21 @@ function ImageGrid({ imageURLs }) {
                     key={obj.key}
                     className='image-grid__item'
                     style={{ backgroundImage: `url("https://${obj.url.split('/')[2]}/${encodeURIComponent(obj.key)}")` }}
-                    onClick={() => setModalUrl(obj.url)}
+                    onClick={() => openModal(index)}
                 >
                 </div>
             ))}
-            {modalUrl && <ImageModal style={{ opacity: 1 }} url={modalUrl} onClose={() => setModalUrl(null)} />}
+
+            {modalIndex !== null && (
+                <ImageModal
+                    url={imageURLs[modalIndex].url}
+                    onClose={closeModal}
+                    allImages={imageURLs}
+                    currentIndex={modalIndex}
+                    onPrevious={goToPrevious}
+                    onNext={goToNext}
+                />
+            )}
         </div>
     );
 }

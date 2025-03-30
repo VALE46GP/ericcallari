@@ -12,10 +12,20 @@
     opacity: 0
     transition: opacity 0.3s ease-in-out
 
+    &__content
+        position: relative
+        display: flex
+        justify-content: center
+        align-items: center
+        max-width: 95%
+        max-height: 95%
+
     img
-        width: 95%
-        height: 95%
+        max-width: 100%
+        max-height: 100%
         object-fit: contain
+        user-select: none
+        -webkit-user-drag: none
 
     &__close
         position: absolute
@@ -27,3 +37,50 @@
         font-size: 32px
         cursor: pointer
         padding: 10px
+        z-index: 110
+
+    &__nav-button
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        background: rgba(0, 0, 0, 0.3)
+        color: white
+        border: none
+        font-size: 48px
+        height: 80px
+        width: 50px
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        transition: background-color 0.2s ease
+        z-index: 110
+
+        &:hover
+            background: rgba(0, 0, 0, 0.5)
+
+        &--left
+            left: 0
+            border-radius: 0 5px 5px 0
+
+        &--right
+            right: 0
+            border-radius: 5px 0 0 5px
+
+    &__counter
+        position: absolute
+        bottom: -40px
+        left: 50%
+        transform: translateX(-50%)
+        background: rgba(0, 0, 0, 0.5)
+        color: white
+        padding: 8px 16px
+        border-radius: 20px
+        font-size: 14px
+        z-index: 110
+
+    @media (max-width: 768px)
+        &__nav-button
+            font-size: 36px
+            height: 60px
+            width: 40px
