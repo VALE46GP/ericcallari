@@ -3,9 +3,13 @@ import HeroFilter from '../components/HeroFilter';
 import ImageGrid from '../components/ImageGrid';
 import './Photo.sass';
 import loadingIcon from '../assets/icons/loading.svg';
+import mockGalleryData from '../mockData/mockGalleryData';
 
 // API endpoint for the gallery Lambda function
 const API_ENDPOINT = 'https://2ksoxzg4ni.execute-api.us-west-1.amazonaws.com/prod/images';
+
+// Determine if we're in development mode
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 // Helper function to shuffle an array using Fisher-Yates algorithm
 const shuffleArray = (array) => {
@@ -31,10 +35,41 @@ function Photo() {
 
     const imagesPerLoad = window.innerWidth <= 768 ? 10 : 20;
 
+    // Function to fetch mock data for local development
+    const fetchMockData = useCallback((category) => {
+        console.log('Using mock data for category:', category);
+        let photos = [];
+
+        setTimeout(() => {
+            if (category === 'all') {
+                // Combine all categories for 'all'
+                Object.values(mockGalleryData).forEach(categoryPhotos => {
+                    photos = [...photos, ...categoryPhotos];
+                });
+            } else if (mockGalleryData[category]) {
+                photos = mockGalleryData[category];
+            }
+
+            // Randomize the order
+            const shuffledPhotos = shuffleArray(photos);
+
+            setImageURLs(shuffledPhotos);
+            setDisplayedImages(shuffledPhotos.slice(0, imagesPerLoad));
+            setAllImagesLoaded(shuffledPhotos.length <= imagesPerLoad);
+            setInitialLoading(false);
+        }, 500); // Simulate network delay
+    }, [imagesPerLoad]);
+
     // Function to fetch photos from the Lambda API
     const fetchPhotos = useCallback(async (category) => {
         setError(null);
         setInitialLoading(true);
+
+        // For local development, use mock data
+        if (IS_DEV) {
+            fetchMockData(category);
+            return;
+        }
 
         try {
             // Build the API URL with the category parameter
@@ -81,7 +116,7 @@ function Photo() {
         } finally {
             setInitialLoading(false);
         }
-    }, [imagesPerLoad]);
+    }, [imagesPerLoad, fetchMockData]);
 
     // Randomize images when clicking the same category again
     const handleFilterSelect = useCallback((category) => {
@@ -95,7 +130,7 @@ function Photo() {
             // If selecting a different category, fetch new images
             setActiveFilter(category);
         }
-    }, [activeFilter, imageURLs, imagesPerLoad, fetchPhotos]);
+    }, [activeFilter, imageURLs, imagesPerLoad]);
 
     // Fetch photos when filter changes
     useEffect(() => {
@@ -155,6 +190,12 @@ function Photo() {
                 filters={filters}
                 onFilterSelect={handleFilterSelect}
             />
+
+            {IS_DEV && (
+                <div className="photo__dev-mode">
+                    <span>🔧 Development Mode: Using mock data</span>
+                </div>
+            )}
 
             {initialLoading ? (
                 <div className="photo__initial-loading">
