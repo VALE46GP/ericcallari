@@ -34,10 +34,30 @@ function Photo() {
             const response = await fetch(apiUrl);
 
             if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
+                console.error(`API request failed with status ${response.status}`);
+                setError(`API request failed with status ${response.status}`);
+                setImageURLs([]);
+                setDisplayedImages([]);
+                return; // Exit early
             }
 
-            const photos = await response.json();
+            // Parse the response
+            const data = await response.json();
+
+            // Check if data is in the expected format (debug info)
+            console.log('API response:', data);
+
+            // Handle different response formats
+            let photos = [];
+            if (data && Array.isArray(data)) {
+                // Direct array response
+                photos = data;
+            } else if (data && data.body) {
+                // Response might include a body property with the data
+                // Check if it's a string that needs parsing
+                const bodyData = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
+                photos = Array.isArray(bodyData) ? bodyData : [];
+            }
 
             // Set the images state
             setImageURLs(photos);
