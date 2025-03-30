@@ -31,7 +31,7 @@ function Home() {
                         <div className='home__button-container'>
                             <a
                                 className='home__button'
-                                href='https://ericcallari.s3.us-west-1.amazonaws.com/Eric+Callari+Resume+(no+phone).pdf'
+                                href='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/Eric+Callari+Resume+(no+phone).pdf'
                                 rel='noopener noreferrer'
                                 target='_blank'
                             >

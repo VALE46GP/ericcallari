@@ -7,7 +7,7 @@ function HeroFilter({ filters, activeFilter, onFilterSelect }) {
             <img
                 alt='sunrise from mountain top'
                 className='hero-filter__image'
-                src='https://ericcallari.s3.us-west-1.amazonaws.com/hero-filter-1.jpg'
+                src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/hero-filter-1.jpg'
             />
             <div className='hero-filter__filter-wrapper'>
                 <div className='hero-filter__filter'>

@@ -1,6 +1,5 @@
 import './HeroParallax.sass';
 import React, { useState, useEffect } from 'react';
-import { Container, Row } from 'react-bootstrap';
 import HeroNav from './HeroNav';
 
 function HeroParallax() {
@@ -27,13 +26,13 @@ function HeroParallax() {
     return (
         <div className='hero-parallax'>
             <div className='hero-parallax__layer hero-parallax__layer--back'>
-                <img alt='Background Layer' src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-back-compressed.jpg' />
+                <img alt='Background Layer' src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/tank-hill-back-compressed.jpg' />
             </div>
             <div className='hero-parallax__layer hero-parallax__layer--middle'>
-                <img alt='Middle Layer' src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-middle-2-compressed.png' />
+                <img alt='Middle Layer' src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/tank-hill-middle-2-compressed.png' />
             </div>
             <div className='hero-parallax__layer hero-parallax__layer--front'>
-                <img alt='Front Layer' src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-front-2-compressed.png' />
+                <img alt='Front Layer' src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/tank-hill-front-2-compressed.png' />
             </div>
             <div className='hero-parallax__content'>
                 <div className='hero-parallax__nav-container'>

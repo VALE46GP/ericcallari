@@ -7,7 +7,7 @@ function Hero() {
             <img
                 alt='self portrait overlooking San Francisco'
                 className='hero__image'
-                src='https://ericcallari.s3.us-west-1.amazonaws.com/tank-hill-centered.jpg'
+                src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/tank-hill-centered.jpg'
             />
             <div className='hero__content'>
             </div>

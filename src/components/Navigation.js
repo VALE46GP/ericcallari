@@ -40,7 +40,7 @@ function Navigation() {
                         alt='Eric Callari Logo'
                         className='navigation__logo d-inline-block align-top'
                         height='auto'
-                        src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png'
+                        src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/logo.png'
                         width='125'
                     />
                 </Navbar.Brand>

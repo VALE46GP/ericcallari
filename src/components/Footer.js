@@ -11,7 +11,7 @@ function Footer() {
                     <Col lg={12} className='footer__col'>
                         <div>
                             <Link to='/'>
-                                <img src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png' alt='Eric Callari Logo' />
+                                <img src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/logo.png' alt='Eric Callari Logo' />
                             </Link>
                         </div>
                         <div>

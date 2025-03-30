@@ -1,6 +1,5 @@
 import './HeroNav.sass';
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function HeroNav() {
@@ -11,7 +10,7 @@ function HeroNav() {
                     <img
                         alt='Eric Callari Logo'
                         className='hero-nav__logo'
-                        src='https://ericcallari.s3.us-west-1.amazonaws.com/logo.png'
+                        src='https://ericcallari-site.s3.us-west-1.amazonaws.com/assets/logo.png'
                     />
                 </div>
                 <div className='hero-nav__buttons'>
