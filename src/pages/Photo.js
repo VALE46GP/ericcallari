@@ -7,6 +7,16 @@ import loadingIcon from '../assets/icons/loading.svg';
 // API endpoint for the gallery Lambda function
 const API_ENDPOINT = 'https://2ksoxzg4ni.execute-api.us-west-1.amazonaws.com/prod/images';
 
+// Helper function to shuffle an array using Fisher-Yates algorithm
+const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+};
+
 function Photo() {
     const [imageURLs, setImageURLs] = useState([]);
     const [displayedImages, setDisplayedImages] = useState([]);
@@ -28,7 +38,7 @@ function Photo() {
 
         try {
             // Build the API URL with the category parameter
-            const apiUrl = `${API_ENDPOINT}?category=${category}`;
+            const apiUrl = `${API_ENDPOINT}?category=${encodeURIComponent(category)}`;
 
             // Fetch data from the API
             const response = await fetch(apiUrl);
@@ -44,9 +54,6 @@ function Photo() {
             // Parse the response
             const data = await response.json();
 
-            // Check if data is in the expected format (debug info)
-            console.log('API response:', data);
-
             // Handle different response formats
             let photos = [];
             if (data && Array.isArray(data)) {
@@ -59,10 +66,13 @@ function Photo() {
                 photos = Array.isArray(bodyData) ? bodyData : [];
             }
 
+            // Randomize the order of photos
+            const shuffledPhotos = shuffleArray(photos);
+
             // Set the images state
-            setImageURLs(photos);
-            setDisplayedImages(photos.slice(0, imagesPerLoad));
-            setAllImagesLoaded(photos.length <= imagesPerLoad);
+            setImageURLs(shuffledPhotos);
+            setDisplayedImages(shuffledPhotos.slice(0, imagesPerLoad));
+            setAllImagesLoaded(shuffledPhotos.length <= imagesPerLoad);
         } catch (err) {
             console.error('Error fetching photos from API', err);
             setError('Failed to load images. Please try again later.');
@@ -72,6 +82,20 @@ function Photo() {
             setInitialLoading(false);
         }
     }, [imagesPerLoad]);
+
+    // Randomize images when clicking the same category again
+    const handleFilterSelect = useCallback((category) => {
+        if (category === activeFilter) {
+            // If selecting the same category, just reshuffle the existing images
+            const shuffledPhotos = shuffleArray(imageURLs);
+            setImageURLs(shuffledPhotos);
+            setDisplayedImages(shuffledPhotos.slice(0, imagesPerLoad));
+            setAllImagesLoaded(shuffledPhotos.length <= imagesPerLoad);
+        } else {
+            // If selecting a different category, fetch new images
+            setActiveFilter(category);
+        }
+    }, [activeFilter, imageURLs, imagesPerLoad, fetchPhotos]);
 
     // Fetch photos when filter changes
     useEffect(() => {
@@ -129,12 +153,12 @@ function Photo() {
             <HeroFilter
                 activeFilter={activeFilter}
                 filters={filters}
-                onFilterSelect={setActiveFilter}
+                onFilterSelect={handleFilterSelect}
             />
 
             {initialLoading ? (
                 <div className="photo__initial-loading">
-                    <img src={loadingIcon} alt="Loading..." />
+                    <img src={loadingIcon} alt="Loading..." className="photo__spinning-icon" />
                     <p>Loading gallery...</p>
                 </div>
             ) : error ? (
@@ -148,7 +172,7 @@ function Photo() {
 
                     {loading && (
                         <div className="photo__loading-spinner">
-                            <img src={loadingIcon} alt="Loading..." />
+                            <img src={loadingIcon} alt="Loading..." className="photo__spinning-icon" />
                         </div>
                     )}
 
